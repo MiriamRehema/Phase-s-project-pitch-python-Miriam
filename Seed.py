@@ -1,39 +1,33 @@
-from model import add_password
-from sqlalchemy.exc import IntegrityError
-from cryptography.fernet import Fernet, InvalidToken
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model import Base, Password
 
-# Encryption key (replace with your own secret key)
-ENCRYPTION_KEY = b'your_secret_key_here'
-
-def encrypt_data(data, key):
-    cipher_suite = Fernet(key)
-    return cipher_suite.encrypt(data.encode())
-
-# Sample data to seed the database (encrypted)
-sample_data = [
-    {"account": "example1.com", "password": "password1"},
-    {"account": "example2.com", "password": "password2"},
-    {"account": "example3.com", "password": "password3"},
-]
+# Initialize the database connection
+engine = create_engine("sqlite:///passwords.db")
+Base.metadata.bind = engine
+Session = sessionmaker(bind=engine)
 
 def seed_database():
-    for data in sample_data:
-        account = data["account"]
-        password = data["password"]
+    # Create a session
+    session = Session()
 
-        # To demonstrate deletion, uncomment the following line
-        # delete_password(account)
-        # print(f"Deleted {account} from the database.")
+    # Define the initial data you want to insert into the database
+    initial_data = [
+        {"account": "Miriam", "password": "659556"},
+        {"account": "Rehema", "password": "fur677"},
+        {"account": "Irungu", "password": "jhfyk6545"},
+    ]
 
-        try:
-            encrypted_password = encrypt_data(password, ENCRYPTION_KEY)
-            add_password(account, encrypted_password)
-            print("Added {} to the database".format(account))
+    # Insert the initial data into the database
+    for data in initial_data:
+        new_password = Password(account=data["account"], password=data["password"])
+        session.add(new_password)
 
-        except IntegrityError:
-          print("{} already exists in the database. Skipping.".format(account))
+    # Commit the changes and close the session
+    session.commit()
+    session.close()
 
-        except InvalidToken:
-           print("Failed to encrypt {}'s password. Skipping.".format(account))
 if __name__ == "__main__":
+    # Call the seed_database function to insert the initial data
     seed_database()
+    print("Database seeded successfully.")
