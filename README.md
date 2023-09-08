@@ -5,6 +5,7 @@ My Password Manager is a simple command-line application for managing and storin
 ## Table of Content
 
 Dependancies
+Commands
 Technology Used
 Licence
 Authors Info
@@ -19,6 +20,13 @@ a.pip install sqlalchemy
 
 # Click: Click is used for creating the command-line interface. Install it using pip:
 b.pip install click
+
+# Commands
+# Display All Accounts: 1
+# Display Password for an Account: 2
+# Delete Password: 3
+# Add a Password: 4
+# Exit: 5
 
 ## Technology used
 The challenge was mainly based on Python, so I used the following technologies:
@@ -50,33 +58,33 @@ You can now use the following commands to manage your passwords:
 
 Add a Password: To add a new password, run the following command:
 
-python password_project.py add <account> <password>
+python project_password.py add <account> <password>
 
 Retrieve a Password: To retrieve a password, run the following command:
 
-python password_project.py get <account>
+python project_password.py get <account>
 
 List All Accounts: To list all saved accounts, run:
 
-python password_project.py list
+python project_password.py list
 
 Delete a Password: To delete a password for a specific account, run:
 
-python password_project.py delete <account>
+python project_password.py delete <account>
 Usage Examples
 Here are some usage examples of the My Password Manager commands:
 
 Adding a Password:
-python password_project.py add example<_account example_password>
+python project_password.py add example<_account example_password>
 
 Retrieving a Password:
-python password_project.py get <example_account>
+python project_password.py get <example_account>
 
 Listing All Accounts:
-python password_project.py list
+python project_password.py list
 
 Deleting a Password:
-python password_project.py delete example_account
+python project_password.py delete example_account
 
 Note
 
