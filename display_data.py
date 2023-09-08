@@ -1,4 +1,4 @@
-from model import list_accounts, get_password
+from model import list_accounts, get_password,delete_password,add_password
 #defining the fuction
 def display_accounts():
     #the accounts should be equal to the list_accounts
@@ -21,10 +21,16 @@ def display_password(account):
 
 if __name__ == "__main__":
     print("My Password Manager - Display Data")
+    
     print("1. Display All Accounts")
     print("2. Display Password for an Account")
-    choice = input("Enter your choice (1/2): ")
+    print("3. Delete password")
+    print("4. Add a password")
+    print("5. Exit")
+    
+    choice = input("Enter your choice (1/2/3/4/5): ")
 #if your choice is an account
+    
     if choice == "1":
         display_accounts()
     elif choice == "2":
@@ -32,5 +38,15 @@ if __name__ == "__main__":
         account = input("Enter the account name: ")
         display_password(account)
         #if the account name does not exist it will print an invalid choice since its not there
+    elif choice=="3":
+        account=input("Entre account name: ")
+        delete_password(account)
+    elif choice=="4":
+        account=input("Entre an account name:")
+        password=input("Entre a password:")
+        add_password(account,password)
+    elif choice=="5":
+        print("You have now exited")
+
     else:
-        print("Invalid choice. Please select 1 or 2.")
+        print("Invalid choice. Please select 1 ,2,3,4 or 5")
